@@ -3,145 +3,461 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhik Studios - Games & Apps</title>
+
+    <title>Abhik Studios | Games & Apps</title>
+
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: #0f172a;
-            color: #f8fafc;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
             min-height: 100vh;
+            color: #f8fafc;
+            background:
+                radial-gradient(circle at 20% 10%, rgba(56, 189, 248, 0.14), transparent 30%),
+                radial-gradient(circle at 80% 30%, rgba(139, 92, 246, 0.12), transparent 30%),
+                #070b14;
+            overflow-x: hidden;
         }
 
+        /* Animated background glow */
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: rgba(14, 165, 233, 0.08);
+            filter: blur(100px);
+            top: -200px;
+            left: -200px;
+            animation: float 8s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(120px, 100px);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 22px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.25s;
+        }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        /* Hero */
         header {
             text-align: center;
-            margin-bottom: 30px;
-            margin-top: 10px;
+            max-width: 850px;
+            margin: 70px auto 65px;
+            padding: 0 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 14px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            background: rgba(56, 189, 248, 0.08);
+            border-radius: 50px;
+            color: #7dd3fc;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
         }
 
         header h1 {
-            font-size: 2.2rem;
-            color: #38bdf8;
-            letter-spacing: 1px;
+            font-size: clamp(3rem, 9vw, 6rem);
+            line-height: 0.95;
+            font-weight: 900;
+            letter-spacing: -3px;
+
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                #38bdf8,
+                #a78bfa
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         header p {
             color: #94a3b8;
-            margin-top: 5px;
-            font-size: 1rem;
+            margin: 22px auto 0;
+            font-size: 1.05rem;
+            max-width: 600px;
+            line-height: 1.7;
         }
 
-        .container {
+        /* Main */
+        main {
             width: 100%;
-            max-width: 500px;
-            display: flex;
-            flex-direction: column;
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px 60px;
+        }
+
+        .section-title {
+            margin-bottom: 25px;
+        }
+
+        .section-title h2 {
+            font-size: 1.8rem;
+        }
+
+        .section-title p {
+            color: #64748b;
+            margin-top: 5px;
+        }
+
+        /* Game grid */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
         }
 
+        /* Cards */
         .card {
-            background-color: #1e293b;
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            border: 1px solid #334155;
+            position: relative;
+            overflow: hidden;
+
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(14px);
+
+            border: 1px solid #1e293b;
+            border-radius: 22px;
+
+            padding: 25px;
+
+            min-height: 250px;
+
             display: flex;
             flex-direction: column;
-            gap: 12px;
+
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: rgba(56, 189, 248, 0.08);
+            top: -100px;
+            right: -80px;
+            transition: 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(56, 189, 248, 0.45);
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(56, 189, 248, 0.08);
+        }
+
+        .card:hover::before {
+            transform: scale(1.5);
+        }
+
+        /* Game icon */
+        .icon {
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 16px;
+
+            background: linear-gradient(
+                135deg,
+                #0ea5e9,
+                #6366f1
+            );
+
+            font-size: 1.8rem;
+
+            margin-bottom: 20px;
+
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.2);
         }
 
         .card h2 {
-            font-size: 1.4rem;
-            color: #f1f5f9;
+            font-size: 1.35rem;
+            margin-bottom: 8px;
         }
 
         .card p {
-            font-size: 0.95rem;
-            color: #cbd5e1;
-            line-height: 1.4;
+            color: #94a3b8;
+            line-height: 1.6;
+            font-size: 0.93rem;
+            flex: 1;
         }
 
+        /* Buttons */
         .download-btn {
-            display: inline-block;
-            text-align: center;
-            background-color: #0284c7;
-            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            margin-top: 22px;
+
+            padding: 13px 18px;
+
+            border-radius: 12px;
+
+            color: white;
             text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: background 0.2s ease;
-            margin-top: 5px;
+
+            font-weight: 700;
+            font-size: 0.95rem;
+
+            background: linear-gradient(
+                135deg,
+                #0284c7,
+                #4f46e5
+            );
+
+            transition: 0.25s;
+
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.18);
+        }
+
+        .download-btn:hover {
+            transform: scale(1.025);
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.25);
         }
 
         .download-btn:active {
-            background-color: #0369a1;
+            transform: scale(0.98);
         }
 
+        /* Footer */
         footer {
-            margin-top: auto;
-            padding-top: 30px;
-            color: #64748b;
-            font-size: 0.85rem;
             text-align: center;
+            padding: 35px 20px;
+            color: #475569;
+            border-top: 1px solid #172033;
+            font-size: 0.85rem;
+        }
+
+        footer strong {
+            color: #64748b;
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+            nav {
+                padding: 18px;
+            }
+
+            header {
+                margin-top: 45px;
+                margin-bottom: 50px;
+            }
+
+            header h1 {
+                letter-spacing: -2px;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                min-height: 230px;
+            }
         }
     </style>
 </head>
+
 <body>
 
+    <nav>
+        <div class="logo">
+            Abhik <span>Studios</span>
+        </div>
+
+        <a href="#games">Games & Apps</a>
+    </nav>
+
+
     <header>
-        <h1>Abhik Studios</h1>
-        <p>Official Game & App Downloads</p>
+
+        <div class="badge">
+            ✦ INDEPENDENT GAME STUDIO
+        </div>
+
+        <h1>
+            Abhik<br>
+            Studios
+        </h1>
+
+        <p>
+            Games, apps and weird little ideas made with creativity,
+            code and way too much caffeine.
+        </p>
+
     </header>
 
-    <div class="container">
 
-        <!-- Click Game -->
-        <div class="card">
-            <h2>Click Game</h2>
-            <p>Fast-paced arcade clicker action. Test your reflexes and set high scores!</p>
-            <!-- Replace click-game.apk with your actual hosted direct link -->
-            <a href="https://drive.google.com/file/d/1NOXCSuxJp8Za0dsGVmwafGK6ewrywZuO/view?usp=drivesdk" download class="download-btn">Download APK</a>
+    <main id="games">
+
+        <div class="section-title">
+            <h2>🎮 Games & Apps</h2>
+            <p>Check out what we've been making.</p>
         </div>
 
-        <!-- Fluffy Farm -->
-        <div class="card">
-            <h2>Fluffy Farm</h2>
-            <p>A cozy farming simulator where you grow crops, manage your plot, and build your dream farm.</p>
-            <!-- Replace cozy-farm.apk with your actual hosted direct link -->
-            <a href="https://drive.google.com/file/d/1vMvYhp_1n8xnN_tc3_BOCoCRP--JNHSq/view?usp=drivesdk" download class="download-btn">Download APK</a>
+
+        <div class="container">
+
+            <!-- Click Game -->
+            <div class="card">
+
+                <div class="icon">🖱️</div>
+
+                <h2>Click Game</h2>
+
+                <p>
+                    Fast-paced arcade clicking action.
+                    Test your reflexes and chase higher scores.
+                </p>
+
+                <a
+                    href="https://drive.google.com/file/d/1NOXCSuxJp8Za0dsGVmwafGK6ewrywZuO/view?usp=drivesdk"
+                    class="download-btn"
+                    download
+                >
+                    ↓ Download APK
+                </a>
+
+            </div>
+
+
+            <!-- Fluffy Farm -->
+            <div class="card">
+
+                <div class="icon">🌱</div>
+
+                <h2>Fluffy Farm</h2>
+
+                <p>
+                    A cozy farming simulator where you grow crops,
+                    manage your land and build your dream farm.
+                </p>
+
+                <a
+                    href="https://drive.google.com/file/d/1vMvYhp_1n8xnN_tc3_BOCoCRP--JNHSq/view?usp=drivesdk"
+                    class="download-btn"
+                    download
+                >
+                    ↓ Download APK
+                </a>
+
+            </div>
+
+
+            <!-- Melody Maker -->
+            <div class="card">
+
+                <div class="icon">🎵</div>
+
+                <h2>Melody Maker</h2>
+
+                <p>
+                    Create melodies, experiment with sounds,
+                    tap the grid and make your own beats.
+                </p>
+
+                <a
+                    href="https://drive.google.com/file/d/15fmUNggxB_1Fbmb22RcCWFNpCjY3GtbZ/view?usp=drivesdk"
+                    class="download-btn"
+                    download
+                >
+                    ↓ Download APK
+                </a>
+
+            </div>
+
+
+            <!-- OIIA Cat Spinner -->
+            <div class="card">
+
+                <div class="icon">🐱</div>
+
+                <h2>OIIA Cat Spinner</h2>
+
+                <p>
+                    Spin the legendary cat as fast as you can
+                    and try to rack up an insane high score.
+                </p>
+
+                <a
+                    href="https://drive.google.com/file/d/1YYQ5wyhFdUC1_kj0uHYQ_hooFKy_mutO/view?usp=drivesdk"
+                    class="download-btn"
+                    download
+                >
+                    ↓ Download APK
+                </a>
+
+            </div>
+
         </div>
 
-        <!-- Melody Maker -->
-        <div class="card">
-            <h2>Melody Maker</h2>
-            <p>Interactive web audio synthesizer. Tap grid dots, compose melodies, and record custom beats.</p>
-            <!-- Replace melody-maker.apk with your actual hosted direct link -->
-            <a href="https://drive.google.com/file/d/15fmUNggxB_1Fbmb22RcCWFNpCjY3GtbZ/view?usp=drivesdk" download class="download-btn">Download APK</a>
-        </div>
-        
-        <!-- OIIA cat spinner -->
-        <div class="card">
-            <h2>OIIA cat spinner</h2>
-            <p>An addictive clicking game where you spin the cat as fast as you can to rack up high scores.</p></p>
-            <!-- Replace OIIA-cat-spinner.apk with your actual hosted direct link -->
-            <a href="https://drive.google.com/file/d/1YYQ5wyhFdUC1_kj0uHYQ_hooFKy_mutO/view?usp=drivesdk" download class="download-btn">Download APK</a>
-        </div>
+    </main>
 
-    </div>
 
     <footer>
-        &copy; 2026 Abhik Studios. All rights reserved.
+        © 2026 <strong>Abhik Studios</strong> · Made with creativity.
     </footer>
 
 </body>
